@@ -5,6 +5,7 @@ public class MapManager : MonoBehaviour
     public static MapManager Instance { get; private set; }
 
     [SerializeField] private float mapHeightUnits;
+    [SerializeField] GameObject levelArea;
 
     private void Awake()
     {
