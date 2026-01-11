@@ -5,6 +5,8 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
 
+    [SerializeField] private Player player;
+
     private PlayerInput _playerInput;
     private InputAction _flyAction;
 
@@ -27,14 +29,14 @@ public class InputManager : MonoBehaviour
         // 5. Check if the action exists and is being pressed
         if (_flyAction != null && _flyAction.IsPressed())
         {
-            WizardMovement.Instance.Fly();
+            player.Fly();
             Debug.Log("InputManager: Fly() gets called");
         }
 
         //better movement feeling -> yforce = 0, when not pressed anymore
         if (_flyAction.IsPressed() != true)
         {
-            WizardMovement.Instance.DropFlyForce();
+            player.DropFlyForce();
         }
     }
 }
