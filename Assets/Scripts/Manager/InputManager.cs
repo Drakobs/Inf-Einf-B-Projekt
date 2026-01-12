@@ -32,11 +32,5 @@ public class InputManager : MonoBehaviour
             player.Fly();
             Debug.Log("InputManager: Fly() gets called");
         }
-
-        //better movement feeling -> yforce = 0, when not pressed anymore
-        if (_flyAction.IsPressed() != true)
-        {
-            player.DropFlyForce();
-        }
     }
 }
