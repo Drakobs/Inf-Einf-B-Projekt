@@ -30,6 +30,7 @@ public class InputManager : MonoBehaviour
         if (_flyAction != null && _flyAction.IsPressed())
         {
             player.Fly();
+            Debug.Log("InputManager: Fly() gets called");
         }
     }
 }
