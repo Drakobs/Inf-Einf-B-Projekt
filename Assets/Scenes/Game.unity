@@ -1107,10 +1107,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   _rb: {fileID: 2059915985}
   flyForce: 25
-  _anim: {fileID: 2059915990}
-  gameStarted: 0
-  isGrounded: 0
-  yVelocity: 0
 --- !u!70 &2059915988
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1158,7 +1154,7 @@ Animator:
   m_GameObject: {fileID: 2059915981}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 15437ccc69af247e1ac78506fa67b4dd, type: 2}
+  m_Controller: {fileID: 9100000, guid: 16baaf8dbb7f1014f92d581b25b89111, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
