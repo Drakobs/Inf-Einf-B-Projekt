@@ -150,82 +150,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 585655235}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &238309096
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 238309097}
-  - component: {fileID: 238309098}
-  - component: {fileID: 238309099}
-  m_Layer: 0
-  m_Name: InputManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &238309097
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 238309096}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1832236316}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &238309098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 238309096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9ca235f18dd38f49b5f95ee1fa79ad1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InputManager
-  player: {fileID: 2059915986}
---- !u!114 &238309099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 238309096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: 
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1001 &243753867
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -313,10 +237,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1001651060}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &585655234
 GameObject:
@@ -447,17 +371,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1599398126879654789, guid: 772b6dc4216abc843860a508cfa0f53a, type: 3}
   m_PrefabInstance: {fileID: 243753867}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &760148805 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1519276516704491416, guid: 772b6dc4216abc843860a508cfa0f53a, type: 3}
-  m_PrefabInstance: {fileID: 243753867}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a53bb13af67e774992921ec2d2f93ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Section
 --- !u!1 &877074645
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +478,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -583,7 +496,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -703,11 +616,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   mapHeightUnits: 7
   sectionsContainer: {fileID: 1727703638}
-  startSection: {fileID: 760148805}
   sectionPrefabs:
   - {fileID: 164308641442452486, guid: 1a97ef2856e2aeb4a9972219f1734095, type: 3}
   anchorSpawn: {fileID: 202266134}
   anchorDespawn: {fileID: 1974693056}
+  _startSection: {fileID: 2103444260}
   movementSpeed: 2
 --- !u!4 &1081374645
 Transform:
@@ -904,7 +817,7 @@ Transform:
   m_GameObject: {fileID: 1528437052}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.5, y: -0.5, z: -10}
+  m_LocalPosition: {x: 4, y: -0.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -985,7 +898,7 @@ Transform:
   m_GameObject: {fileID: 1575143315}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.884, y: -1.35957, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1179,7 +1092,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1633088524}
-  - {fileID: 238309097}
   - {fileID: 1060594013}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1269,6 +1181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2059915984}
   - component: {fileID: 2059915986}
+  - component: {fileID: 2059915992}
   - component: {fileID: 2059915983}
   - component: {fileID: 2059915985}
   - component: {fileID: 2059915988}
@@ -1501,6 +1414,63 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.56, y: 0.3}
   m_EdgeRadius: 0
+--- !u!114 &2059915992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059915981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 63b3d6c9538b6a04098286a6162a890b, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2059915986}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnFly
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 61b0ded8-8f8d-4389-86cf-d20f36cf2e38
+    m_ActionName: 'Player/Fly[/Mouse/leftButton,/Touchscreen/press,/Keyboard/space]'
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &2103444260 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5286508095905042168, guid: 772b6dc4216abc843860a508cfa0f53a, type: 3}
+  m_PrefabInstance: {fileID: 243753867}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6ea2851f0a3c7544ae69077380d799c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

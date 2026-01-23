@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     {
         CurrentState = GameState.StartMenu;
         UIManager.Instance.OpenPopup<StartMenu>();
+        CameraController.Instance.PositionCamera(MapManager.Instance.StartSection.AnchorCamera);
     }
 
 

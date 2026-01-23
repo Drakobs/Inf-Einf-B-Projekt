@@ -10,12 +10,16 @@ public class MapManager : MonoBehaviour
 
     [Header("Section Management")]
     [SerializeField] Transform sectionsContainer;
-    [SerializeField] Section startSection;
     [SerializeField] List<Section> sectionPrefabs;
     [SerializeField] Transform anchorSpawn;
     [SerializeField] Transform anchorDespawn;
 
+    [Space(10)]
+    [SerializeField] StartSection _startSection;
+
     private List<Section> sections;
+    public StartSection StartSection { get { return _startSection; } }
+
     [SerializeField] private float movementSpeed;
 
     private bool isPaused;
@@ -38,7 +42,7 @@ public class MapManager : MonoBehaviour
         isPaused = GameManager.Instance.CurrentState != GameState.Level;
 
         // add start section to active sections list
-        sections = new List<Section>() { startSection };
+        sections = new List<Section>() { _startSection };
     }
 
     // Update is called once per frame

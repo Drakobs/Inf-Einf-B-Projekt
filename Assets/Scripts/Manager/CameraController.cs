@@ -25,18 +25,6 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        AdjustCameraSize();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     /// <summary>
     /// Adjusts the camera's orthographic size based on the desired number of visible tiles.
     /// </summary>
@@ -51,5 +39,19 @@ public class CameraController : MonoBehaviour
         float visibleTilesHeight = totalVisibleTiles * tileHeight;
 
         _camera.orthographicSize = visibleTilesHeight / 2f;
+    }
+
+    /// <summary>
+    /// Positions the camera
+    /// </summary>
+    public void PositionCamera(Transform leftEdgeAnchor)
+    {
+        AdjustCameraSize();
+
+        float horizontalSize = _camera.orthographicSize * _camera.aspect;
+        Vector3 cameraPosition = _camera.transform.position;
+        cameraPosition.x = leftEdgeAnchor.position.x + horizontalSize;
+
+        _camera.transform.position = cameraPosition;
     }
 }
