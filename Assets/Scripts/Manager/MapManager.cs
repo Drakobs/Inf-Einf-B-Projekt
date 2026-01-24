@@ -39,10 +39,13 @@ public class MapManager : MonoBehaviour
     void Start()
     {
         //set initial paused state
-        isPaused = GameManager.Instance.CurrentState != GameState.Level;
+        isPaused = GameManager.Instance.CurrentState != GameManager.GameState.Level;
 
         // add start section to active sections list
         sections = new List<Section>() { _startSection };
+
+        // subscribe to level start event
+        GameManager.Instance.LevelStarted += OnLevelStart;
     }
 
     // Update is called once per frame

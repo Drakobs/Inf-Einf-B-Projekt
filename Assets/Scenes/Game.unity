@@ -1378,7 +1378,6 @@ MonoBehaviour:
   flyForce: 25
   maxFlyForce: 30
   _anim: {fileID: 2059915990}
-  isFlying: 0
 --- !u!70 &2059915988
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

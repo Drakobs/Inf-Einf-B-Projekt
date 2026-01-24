@@ -7,8 +7,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float flyForce = 55f;
     [SerializeField] private float maxFlyForce = 30f;
     [SerializeField] Animator _anim;
-    [SerializeField] private bool isFlying;
 
+    private bool isFlying;
     private bool isHoldingFly;
 
     public void OnFly(InputAction.CallbackContext context)
@@ -37,6 +37,10 @@ public class Player : MonoBehaviour
     {
         isFlying = false; 
         _anim.SetBool("isGrounded", !isFlying);
+    }
+
+    public void Kill()
+    {
     }
 }
 

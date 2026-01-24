@@ -3,6 +3,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    #region GameState Enum
+    public enum GameState
+    {
+        StartMenu,
+        Level,
+        Paused
+    }
+    #endregion
+
     public static GameManager Instance { get; private set; }
 
     [SerializeField] private Player _player;
@@ -14,6 +23,7 @@ public class GameManager : MonoBehaviour
     #region Events
     public event Action Paused;
     public event Action Resumed;
+    public event Action LevelStarted;
     #endregion
 
     private void Awake()
@@ -40,7 +50,7 @@ public class GameManager : MonoBehaviour
     {
         UIManager.Instance.CloseAllPopups();
         CurrentState = GameState.Level;
-        MapManager.Instance.OnLevelStart();
+        LevelStarted?.Invoke();
     }
 
     public void PauseGame()
