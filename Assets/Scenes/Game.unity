@@ -1309,6 +1309,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   _rb: {fileID: 2059915985}
   flyForce: 25
+  maxFlyForce: 30
+  _anim: {fileID: 2059915990}
+  isFlying: 0
 --- !u!70 &2059915988
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1444,7 +1447,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2059915986}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: OnFly
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
