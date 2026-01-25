@@ -18,13 +18,16 @@ public class Map : MonoBehaviour
     [Space(10)]
     [SerializeField] StartSection startSection;
 
+    [Header("Background")]
+    [SerializeField] SpriteRenderer fogRenderer;
+
     private List<Section> sections;
 
     [SerializeField] private float movementSpeed;
 
     private bool isPaused;
 
-    void Awake()
+    void Start()
     {
         // register self on game manager
         GameManager.Instance.Map = this;
@@ -35,15 +38,16 @@ public class Map : MonoBehaviour
 
         // add start section to active sections list
         sections = new List<Section>() { startSection };
-    }
 
-    void Start()
-    {
         //position camera
         CameraController.Instance.PositionCamera(startSection.AnchorCamera, tilemapGrid, visibleUnits);
+
+        //set background fog
+ 
         
         //set initial paused state
         isPaused = GameManager.Instance.CurrentState != GameManager.GameState.Level;
+
     }
 
     // Update is called once per frame

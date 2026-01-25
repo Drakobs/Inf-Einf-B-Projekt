@@ -49,6 +49,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        // start the game with the start menu
+        Restart(false);
+    }
+
 
     private void StartGame()
     {

@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     public event Action Died;
 
 
-    private void Awake()
+    private void Start()
     {
         GameManager.Instance.Player = this;
     }

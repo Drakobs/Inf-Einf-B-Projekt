@@ -14,9 +14,6 @@ public class Bootstrap : MonoBehaviour
 
         // wait for UIManager to be initialized
         yield return new WaitUntil(() => GameManager.Instance != null);
-        
-        // load the game
-        GameManager.Instance.Restart(false);
 
         // unload bootstrap scene
         SceneManager.UnloadSceneAsync(gameObject.scene);
