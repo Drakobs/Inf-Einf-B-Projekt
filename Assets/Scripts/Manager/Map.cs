@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
-public class MapManager : MonoBehaviour
+public class Map : MonoBehaviour
 {
-    public static MapManager Instance { get; private set; }
-
-    [SerializeField] private float mapHeightUnits;
+    [SerializeField] private Grid tilemapGrid;
+    [SerializeField] private float heightUnits;
+    [SerializeField] private float visibleUnits;
 
     [Header("Section Management")]
     [SerializeField] Transform sectionsContainer;
@@ -15,37 +16,34 @@ public class MapManager : MonoBehaviour
     [SerializeField] Transform anchorDespawn;
 
     [Space(10)]
-    [SerializeField] StartSection _startSection;
+    [SerializeField] StartSection startSection;
 
     private List<Section> sections;
-    public StartSection StartSection { get { return _startSection; } }
 
     [SerializeField] private float movementSpeed;
 
     private bool isPaused;
 
-    private void Awake()
+    void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
+        // register self on game manager
+        GameManager.Instance.Map = this;
+
+        // subscribe to GameManager events
+        GameManager.Instance.LevelStarted += OnLevelStart;
+        GameManager.Instance.LevelEnded += OnLevelEnd;
+
+        // add start section to active sections list
+        sections = new List<Section>() { startSection };
     }
 
     void Start()
     {
+        //position camera
+        CameraController.Instance.PositionCamera(startSection.AnchorCamera, tilemapGrid, visibleUnits);
+        
         //set initial paused state
         isPaused = GameManager.Instance.CurrentState != GameManager.GameState.Level;
-
-        // add start section to active sections list
-        sections = new List<Section>() { _startSection };
-
-        // subscribe to level start event
-        GameManager.Instance.LevelStarted += OnLevelStart;
     }
 
     // Update is called once per frame
@@ -80,6 +78,12 @@ public class MapManager : MonoBehaviour
         {
             SpawnRandomSection();
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.LevelStarted -= OnLevelStart;
+        GameManager.Instance.LevelEnded -= OnLevelEnd;
     }
 
     #region Spawning/Despawing Sections
@@ -121,9 +125,20 @@ public class MapManager : MonoBehaviour
         Debug.Log("Section spawned");
     }
 
+    /// <summary>
+    /// Executed when the level starts
+    /// </summary>
     public void OnLevelStart()
     {
         isPaused = false;
+    }
+
+    /// <summary>
+    /// Executed when the level ends
+    /// </summary>
+    public void OnLevelEnd()
+    {
+        isPaused = true;
     }
     #endregion
 }

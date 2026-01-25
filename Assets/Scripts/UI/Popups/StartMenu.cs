@@ -8,6 +8,6 @@ public class StartMenu : Popup
 
     public void OnClickStart()
     {
-        GameManager.Instance.StartGame();
+        GameManager.Instance.StartLevel();
     }
 }

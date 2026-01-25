@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,15 @@ public class Player : MonoBehaviour
 
     private bool isFlying;
     private bool isHoldingFly;
+    private bool isAlive = true;
+
+    public event Action Died;
+
+
+    private void Awake()
+    {
+        GameManager.Instance.Player = this;
+    }
 
     public void OnFly(InputAction.CallbackContext context)
     {
@@ -22,6 +32,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         if (isHoldingFly == true)
         {
             _rb.AddForce(Vector2.up * flyForce, ForceMode2D.Force);
@@ -41,6 +52,12 @@ public class Player : MonoBehaviour
 
     public void Kill()
     {
+        //check if already eliminated
+        if (!isAlive) return;
+
+        isAlive = false;
+        _rb.freezeRotation = false;
+        Died?.Invoke();
     }
 }
 

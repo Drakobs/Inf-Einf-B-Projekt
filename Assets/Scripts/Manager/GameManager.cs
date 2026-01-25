@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,23 +10,32 @@ public class GameManager : MonoBehaviour
     {
         StartMenu,
         Level,
-        Paused
+        Paused,
+        Loading
     }
     #endregion
 
     public static GameManager Instance { get; private set; }
-
-    [SerializeField] private Player _player;
-
+    
     #region Properties
+    public Player Player { get; set; }
+    public Map Map { get; set; }
     public GameState CurrentState { get; private set; }
     #endregion
 
-    #region Events
-    public event Action Paused;
-    public event Action Resumed;
-    public event Action LevelStarted;
+    #region Attributes
+    private Coroutine restartCoroutine;
     #endregion
+
+    #region Events
+    // pause events
+    public event Action Pause;
+    public event Action Resume;
+    // level events 
+    public event Action LevelStarted;
+    public event Action LevelEnded;
+    #endregion
+
 
     private void Awake()
     {
@@ -38,30 +49,88 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
+
+    private void StartGame()
     {
+        // update game state
         CurrentState = GameState.StartMenu;
+        // open start menu
         UIManager.Instance.OpenPopup<StartMenu>();
-        CameraController.Instance.PositionCamera(MapManager.Instance.StartSection.AnchorCamera);
     }
 
 
-    public void StartGame()
+    public void StartLevel()
     {
+        // close all open popups
         UIManager.Instance.CloseAllPopups();
+        // update game state
         CurrentState = GameState.Level;
         LevelStarted?.Invoke();
+        // subscribe to player death event
+        Player.Died += GameOver;
     }
 
     public void PauseGame()
     {
         CurrentState = GameState.Paused;
-        Paused?.Invoke();
+        Pause?.Invoke();
     }
 
     public void ResumeGame()
     {
         CurrentState = GameState.Level;
-        Resumed?.Invoke();
+        Resume?.Invoke();
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("Game Over");
+        LevelEnded?.Invoke();
+
+        UIManager.Instance.OpenPopup<GameOverMenu>();
+    }
+
+    public void Restart(bool instantStart)
+    {
+        // check whether the restart coroutine is already running
+        if (restartCoroutine != null) return;
+
+        // start restart coroutine
+        restartCoroutine = StartCoroutine(RestartCoroutine(instantStart));
+    }
+
+    private IEnumerator RestartCoroutine(bool instantStart)
+    {
+        // show loading screen
+        UIManager.Instance.OpenPopup<LoadingScreen>(true);
+        // ensure visibility of loading screen
+        yield return null;
+
+        CurrentState = GameState.Loading;
+
+        if (SceneManager.GetSceneByName("Game").isLoaded)
+        {
+            // unload existing game scene if necessary
+            yield return SceneManager.UnloadSceneAsync("Game");
+        }
+        // load game scene
+        yield return SceneManager.LoadSceneAsync("Game", LoadSceneMode.Additive);
+
+        // wait a frame to ensure everything is initialized
+        yield return null;
+
+        if (instantStart)
+        {
+            // start level directly
+            StartLevel();
+        }
+        else
+        {
+            // show main menu
+            StartGame();
+        }
+
+        // mark coroutine as curently not running again
+        restartCoroutine = null;
     }
 }
