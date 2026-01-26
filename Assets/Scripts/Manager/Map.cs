@@ -27,7 +27,7 @@ public class Map : MonoBehaviour
 
     private bool isPaused;
 
-    void Start()
+    private void Start()
     {
         // register self on game manager
         GameManager.Instance.Map = this;
@@ -51,7 +51,7 @@ public class Map : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // stop execution if game is currently not in level state
         if (isPaused) return;

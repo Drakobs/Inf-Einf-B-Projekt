@@ -5,7 +5,7 @@ public class MovingObstacle : MonoBehaviour
     public enum MovementType
     {
         Pendulum,
-        PingPong
+        PingPong,
     }
 
     [Header("Movement Settings")]

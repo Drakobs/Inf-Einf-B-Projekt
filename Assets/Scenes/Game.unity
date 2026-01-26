@@ -966,7 +966,7 @@ SpriteRenderer:
   m_SortingOrder: 100
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 55f235c23b0e51245ab94552c288b87e, type: 3}
-  m_Color: {r: 0, g: 0.7705438, b: 1, a: 0.039215688}
+  m_Color: {r: 0, g: 0.76862717, b: 1, a: 0.0627451}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1248,7 +1248,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2059915984}
-  - component: {fileID: 2059915986}
+  - component: {fileID: 2059915994}
   - component: {fileID: 2059915992}
   - component: {fileID: 2059915983}
   - component: {fileID: 2059915985}
@@ -1364,25 +1364,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2059915986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2059915981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfa3a2e16bedc497ebd94e016588b724, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Player
-  _rb: {fileID: 2059915985}
-  flyForce: 25
-  maxFlyForce: 30
-  _anim: {fileID: 2059915990}
-  isFlying: 0
-  gameStarted: 0
-  yVelocity_rb: 0
 --- !u!70 &2059915988
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1515,7 +1496,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2059915986}
+      - m_Target: {fileID: 2059915994}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: OnFly
         m_Mode: 0
@@ -1547,6 +1528,25 @@ SortingGroup:
   m_SortingOrder: 0
   m_SortAtRoot: 0
   m_Sort3DAs2D: 0
+--- !u!114 &2059915994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059915981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6516882a9e354a8fa732aa42e808f85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
+  _rb: {fileID: 2059915985}
+  flyForce: 55
+  maxFlyForce: 30
+  _anim: {fileID: 2059915990}
+  isFlying: 0
+  gameStarted: 0
+  yVelocity_rb: 0
 --- !u!1 &2127666361
 GameObject:
   m_ObjectHideFlags: 0
