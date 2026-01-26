@@ -19,7 +19,9 @@ public class Map : MonoBehaviour
     [SerializeField] StartSection startSection;
 
     [Header("Background")]
-    [SerializeField] SpriteRenderer fogRenderer;
+    [SerializeField] List<SpriteRenderer> fogRenderers;
+    [SerializeField] Vector2 fogPadding;
+    [SerializeField] Sprite fogSprite;
 
     private List<Section> sections;
 
@@ -27,6 +29,7 @@ public class Map : MonoBehaviour
 
     private bool isPaused;
 
+    #region MonoBehaviour
     private void Start()
     {
         // register self on game manager
@@ -43,7 +46,7 @@ public class Map : MonoBehaviour
         CameraController.Instance.PositionCamera(startSection.AnchorCamera, tilemapGrid, visibleUnits);
 
         //set background fog
- 
+        PositionFog();
         
         //set initial paused state
         isPaused = GameManager.Instance.CurrentState != GameManager.GameState.Level;
@@ -89,6 +92,7 @@ public class Map : MonoBehaviour
         GameManager.Instance.LevelStarted -= OnLevelStart;
         GameManager.Instance.LevelEnded -= OnLevelEnd;
     }
+    #endregion
 
     #region Spawning/Despawing Sections
     /// <summary>
@@ -143,6 +147,35 @@ public class Map : MonoBehaviour
     public void OnLevelEnd()
     {
         isPaused = true;
+    }
+    #endregion
+
+    #region Background Fog
+    private void PositionFog()
+    {
+        if (fogRenderers.Count == 0) return;
+
+        Camera cam = CameraController.Instance.Camera;
+        //calculate camera bounds
+        var camHeight = cam.orthographicSize * 2f;
+        var camWidth = camHeight * cam.aspect;
+        //calculate needed fog scale
+        var fogWidth = camWidth + fogPadding.x;
+        var fogHeight = camHeight + fogPadding.y * 2f;
+        var fogScale = new Vector3(fogWidth / fogSprite.bounds.size.x, fogHeight / fogSprite.bounds.size.y);
+
+        var fogPosition = new Vector3(
+            cam.transform.position.x - camWidth / 2f,
+            cam.transform.position.y
+            );
+
+        foreach (var fogRenderer in fogRenderers)
+        {
+            //set sprite renderer size
+            fogRenderer.transform.localScale = fogScale;
+            //set fog position
+            fogRenderer.transform.position = fogPosition;
+        }
     }
     #endregion
 }
