@@ -8,18 +8,22 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxFlyForce = 30f;
     [SerializeField] Animator _anim;
     [SerializeField] private bool isFlying;
-
+    [SerializeField] private bool gameStarted;
+    [SerializeField] private float yVelocity_rb;
     private bool isHoldingFly;
 
     public void OnFly(InputAction.CallbackContext context)
     {
         if (context.performed) isHoldingFly = true;
         if (context.canceled) isHoldingFly = false;
-        isFlying = true;
-        _anim.SetBool("isGrounded", !isFlying); 
+            isFlying = true;
+            _anim.SetBool("isGrounded", !isFlying); 
     }
 
-
+    private void Update()
+    {
+        animUpdate();
+    }
     private void FixedUpdate()
     {
         if (isHoldingFly == true)
@@ -36,7 +40,17 @@ public class Player : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         isFlying = false; 
+        gameStarted = true;
         _anim.SetBool("isGrounded", !isFlying);
+        _anim.SetBool("gameStarted", gameStarted);
+    }
+
+
+
+    private void animUpdate()
+    {
+        yVelocity_rb = _rb.linearVelocity.y;
+        _anim.SetFloat("yVelocity", yVelocity_rb);
     }
 }
 
