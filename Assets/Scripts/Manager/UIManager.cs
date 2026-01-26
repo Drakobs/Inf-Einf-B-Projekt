@@ -30,9 +30,14 @@ public class UIManager : MonoBehaviour
     /// </summary>
     /// <typeparam name="PopupType">Type of the popup to open</typeparam>
     /// <returns></returns>
-    public PopupType OpenPopup<PopupType>()
+    public PopupType OpenPopup<PopupType>(bool closeOtherPopups = false)
         where PopupType : Popup
     {
+        if (closeOtherPopups)
+        {
+            CloseAllPopups();
+        }
+
         // load popup prefab
         PopupType popupPrefab = Resources.Load<PopupType>($"{popupsResourcesPath}/{typeof(PopupType).Name}");
         if (popupPrefab == null)

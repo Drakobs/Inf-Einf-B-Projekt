@@ -6,12 +6,8 @@ public class CameraController : MonoBehaviour
     public static CameraController Instance { get; private set; }
 
     public Camera Camera { get => _camera; }
-
     [SerializeField] private Camera _camera;
 
-    [Header("Map visibility settings")]
-    [SerializeField] private Grid gridTilemap;
-    [SerializeField] private int visibleTiles;
 
     private void Awake()
     {
@@ -26,15 +22,15 @@ public class CameraController : MonoBehaviour
     }
 
     /// <summary>
-    /// Adjusts the camera's orthographic size based on the desired number of visible tiles.
+    /// Adjusts the camera's orthographic size based on the desired number of visible cells on the given grid
     /// </summary>
-    private void AdjustCameraSize()
+    private void AdjustCameraSize(Grid grid, float visibleTiles)
     {
         // get the size of a tilemap tile in world units
-        float tileHeight = gridTilemap.cellSize.y;
+        float tileHeight = grid.cellSize.y;
 
         // add two extra tiles to ensure full visibility
-        int totalVisibleTiles = visibleTiles + 2;
+        float totalVisibleTiles = visibleTiles + 2;
 
         float visibleTilesHeight = totalVisibleTiles * tileHeight;
 
@@ -44,9 +40,9 @@ public class CameraController : MonoBehaviour
     /// <summary>
     /// Positions the camera
     /// </summary>
-    public void PositionCamera(Transform leftEdgeAnchor)
+    public void PositionCamera(Transform leftEdgeAnchor, Grid grid, float visibleTiles)
     {
-        AdjustCameraSize();
+        AdjustCameraSize(grid, visibleTiles);
 
         float horizontalSize = _camera.orthographicSize * _camera.aspect;
         Vector3 cameraPosition = _camera.transform.position;
