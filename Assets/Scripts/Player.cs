@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,16 @@ public class Player : MonoBehaviour
     [SerializeField] private bool gameStarted;
     [SerializeField] private float yVelocity_rb;
     private bool isHoldingFly;
+
+    private bool isAlive = true;
+
+    public event Action Died;
+
+
+    private void Awake()
+    {
+        GameManager.Instance.Player = this;
+    }
 
     public void OnFly(InputAction.CallbackContext context)
     {
@@ -51,6 +62,16 @@ public class Player : MonoBehaviour
     {
         yVelocity_rb = _rb.linearVelocity.y;
         _anim.SetFloat("yVelocity", yVelocity_rb);
+    }
+
+    public void Kill()
+    {
+        //check if already eliminated
+        if (!isAlive) return;
+
+        isAlive = false;
+        _rb.freezeRotation = false;
+        Died?.Invoke();
     }
 }
 
