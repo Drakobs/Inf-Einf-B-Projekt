@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpeedConfigScriptableObject
   startSpeed: 2
   endSpeed: 20
-  endSpeedThreshold: 1000
+  endSpeedThreshold: 2000
   speedCurve:
     serializedVersion: 2
     m_Curve:
