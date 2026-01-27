@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
     /// Loads and opens a popup
     /// </summary>
     /// <typeparam name="PopupType">Type of the popup to open</typeparam>
+    /// <param name="closeOtherPopups">Whether to close all other popups when opening this one</param>
     /// <returns></returns>
     public PopupType OpenPopup<PopupType>(bool closeOtherPopups = false)
         where PopupType : Popup

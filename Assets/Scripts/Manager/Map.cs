@@ -18,15 +18,28 @@ public class Map : MonoBehaviour
     [Space(10)]
     [SerializeField] StartSection startSection;
 
+    [Header("Movement")]
+    [SerializeField] private SpeedConfigScriptableObject movementSpeedConfig;
+
     [Header("Background")]
     [SerializeField] List<SpriteRenderer> fogRenderers;
     [SerializeField] Vector2 fogPadding;
     [SerializeField] Sprite fogSprite;
 
+    /// <summary>
+    /// Distance moved since level start
+    /// </summary>
+    public float MovedDistance { get { return _movedDistance; } }
+    private float _movedDistance = 0f;
+
+    /// <summary>
+    /// Currently spawned sections in the map
+    /// </summary>
     private List<Section> sections;
 
-    [SerializeField] private float movementSpeed;
-
+    /// <summary>
+    /// Current pause state
+    /// </summary>
     private bool isPaused;
 
     #region MonoBehaviour
@@ -58,33 +71,9 @@ public class Map : MonoBehaviour
     {
         // stop execution if game is currently not in level state
         if (isPaused) return;
-        
-        List<Section> sectionsToDespawn = new List<Section>();
-        // move vector for sections
-        Vector3 moveVector = new Vector3(movementSpeed * Time.deltaTime, 0f, 0f);
-        foreach (Section section in sections)
-        {
-            // move section to the left
-            section.transform.position -= moveVector;
 
-            if (section.AnchorEnd.position.x < anchorDespawn.transform.position.x)
-            {
-                // mark section for despawning
-                sectionsToDespawn.Add(section);
-            }
-        }
-
-        // despawn marked sections
-        foreach (Section section in sectionsToDespawn)
-        {
-            DespawnSection(section);
-        }
-
-        // check whether a new sections must be spawned
-        if (sections[sections.Count - 1].AnchorEnd.transform.position.x < anchorSpawn.transform.position.x) 
-        {
-            SpawnRandomSection();
-        }
+        // move the map
+        Move();
     }
 
     private void OnDestroy()
@@ -147,6 +136,45 @@ public class Map : MonoBehaviour
     public void OnLevelEnd()
     {
         isPaused = true;
+    }
+    #endregion
+
+    #region Movement
+    public void Move()
+    {
+        List<Section> sectionsToDespawn = new List<Section>();
+
+        // get the current movement speed
+        float movementSpeed = movementSpeedConfig.GetSpeedAtDistance(_movedDistance);
+        float additionalDistance = movementSpeed * Time.deltaTime;
+        // move vector for sections
+        Vector3 moveVector = new Vector3(additionalDistance, 0f, 0f);
+        foreach (Section section in sections)
+        {
+            // move section to the left
+            section.transform.position -= moveVector;
+
+            if (section.AnchorEnd.position.x < anchorDespawn.transform.position.x)
+            {
+                // mark section for despawning
+                sectionsToDespawn.Add(section);
+            }
+        }
+
+        // despawn marked sections
+        foreach (Section section in sectionsToDespawn)
+        {
+            DespawnSection(section);
+        }
+
+        // check whether a new sections must be spawned
+        if (sections[sections.Count - 1].AnchorEnd.transform.position.x < anchorSpawn.transform.position.x)
+        {
+            SpawnRandomSection();
+        }
+
+        // add distance gained this frame to total moved distance
+        _movedDistance += additionalDistance;
     }
     #endregion
 

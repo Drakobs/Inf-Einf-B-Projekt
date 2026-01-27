@@ -673,12 +673,12 @@ MonoBehaviour:
   anchorSpawn: {fileID: 202266134}
   anchorDespawn: {fileID: 1974693056}
   startSection: {fileID: 1958040156}
+  movementSpeedConfig: {fileID: 11400000, guid: c7d49cbcbf604674080722eb885545f9, type: 2}
   fogRenderers:
   - {fileID: 1629712620}
   - {fileID: 1782909417}
   fogPadding: {x: 5, y: 2}
   fogSprite: {fileID: 7482667652216324306, guid: 1a6744730ab40d34498f005fec252074, type: 3}
-  movementSpeed: 2
 --- !u!1 &1119572642
 GameObject:
   m_ObjectHideFlags: 0
