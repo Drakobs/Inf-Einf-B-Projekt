@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
     private void playerCatchUp()
     {
         //determine if pos is left or right of 0
-        if()
+        //if()
     }
 
     private void playerRotation()
