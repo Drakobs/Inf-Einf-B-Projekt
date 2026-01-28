@@ -7,6 +7,6 @@ public abstract class Popup : MonoBehaviour
 
     public void Close()
     {
-        Destroy(this);
+        Destroy(gameObject);
     }
 }

@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
     {
         CurrentState = GameState.Paused;
         Pause?.Invoke();
+        UIManager.Instance.OpenPopup<PauseMenu>();
     }
 
     public void ResumeGame()
