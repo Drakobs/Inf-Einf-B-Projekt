@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
     public void StartLevel()
     {
         // close all open popups
-        UIManager.Instance.CloseAllPopups();
+        UIManager.Instance.OpenPopup<LevelHUD>(true);
         // update game state
         CurrentState = GameState.Level;
         LevelStarted?.Invoke();

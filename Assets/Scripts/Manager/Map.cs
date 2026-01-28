@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.PackageManager.Requests;
@@ -8,141 +9,136 @@ public class Map : MonoBehaviour
     [SerializeField] private Grid tilemapGrid;
     [SerializeField] private float heightUnits;
     [SerializeField] private float visibleUnits;
+    [SerializeField] private Transform anchorCamera;
 
-    [Header("Section Management")]
-    [SerializeField] Transform sectionsContainer;
-    [SerializeField] List<Section> sectionPrefabs;
-    [SerializeField] Transform anchorSpawn;
-    [SerializeField] Transform anchorDespawn;
-
-    [Space(10)]
-    [SerializeField] StartSection startSection;
+    [Header("Movement")]
+    [SerializeField] private SpeedConfigScriptableObject movementSpeedConfig;
 
     [Header("Background")]
-    [SerializeField] SpriteRenderer fogRenderer;
+    [SerializeField] List<SpriteRenderer> fogRenderers;
+    [SerializeField] Vector2 fogPadding;
+    [SerializeField] Sprite fogSprite;
 
+    /// <summary>
+    /// Current movement speed of the map
+    /// </summary>
+    public float MovementSpeed{ get { return _movementSpeed; } }
+    private float _movementSpeed;
+
+    /// <summary>
+    /// Distance moved since level start
+    /// </summary>
+    public float MovedDistance { get { return _movedDistance; } }
+    private float _movedDistance;
+
+    /// <summary>
+    /// Currently spawned sections in the map
+    /// </summary>
     private List<Section> sections;
 
-    [SerializeField] private float movementSpeed;
+    /// <summary>
+    /// Current pause state
+    /// </summary>
+    private bool isMoving;
 
-    private bool isPaused;
+    public event Action StartMovement;
+    public event Action StopMovement;
 
+    #region MonoBehaviour
     private void Start()
     {
         // register self on game manager
         GameManager.Instance.Map = this;
 
         // subscribe to GameManager events
-        GameManager.Instance.LevelStarted += OnLevelStart;
-        GameManager.Instance.LevelEnded += OnLevelEnd;
-
-        // add start section to active sections list
-        sections = new List<Section>() { startSection };
+        GameManager.Instance.LevelStarted += OnResume;
+        GameManager.Instance.LevelEnded += OnPause;
+        GameManager.Instance.Pause += OnPause;
+        GameManager.Instance.Resume += OnResume;
 
         //position camera
-        CameraController.Instance.PositionCamera(startSection.AnchorCamera, tilemapGrid, visibleUnits);
+        CameraController.Instance.PositionCamera(anchorCamera, tilemapGrid, visibleUnits);
 
         //set background fog
- 
+        PositionFog();
         
         //set initial paused state
-        isPaused = GameManager.Instance.CurrentState != GameManager.GameState.Level;
+        isMoving = GameManager.Instance.CurrentState == GameManager.GameState.Level;
 
+        //set initial movement settings
+        _movedDistance = 0f;
+        _movementSpeed = movementSpeedConfig.GetSpeedAtDistance(_movedDistance);
     }
 
     // Update is called once per frame
     private void Update()
     {
         // stop execution if game is currently not in level state
-        if (isPaused) return;
-        
-        List<Section> sectionsToDespawn = new List<Section>();
-        // move vector for sections
-        Vector3 moveVector = new Vector3(movementSpeed * Time.deltaTime, 0f, 0f);
-        foreach (Section section in sections)
-        {
-            // move section to the left
-            section.transform.position -= moveVector;
+        if (!isMoving) return;
 
-            if (section.AnchorEnd.position.x < anchorDespawn.transform.position.x)
-            {
-                // mark section for despawning
-                sectionsToDespawn.Add(section);
-            }
-        }
-
-        // despawn marked sections
-        foreach (Section section in sectionsToDespawn)
-        {
-            DespawnSection(section);
-        }
-
-        // check whether a new sections must be spawned
-        if (sections[sections.Count - 1].AnchorEnd.transform.position.x < anchorSpawn.transform.position.x) 
-        {
-            SpawnRandomSection();
-        }
+        // calculates the current movement speed
+        _movementSpeed = movementSpeedConfig.GetSpeedAtDistance(_movedDistance);
+        // increase total moved distance
+        _movedDistance += _movementSpeed * Time.deltaTime;
     }
 
     private void OnDestroy()
     {
-        GameManager.Instance.LevelStarted -= OnLevelStart;
-        GameManager.Instance.LevelEnded -= OnLevelEnd;
+        GameManager.Instance.LevelStarted -= OnResume;
+        GameManager.Instance.LevelEnded -= OnPause;
+        GameManager.Instance.Pause -= OnPause;
+        GameManager.Instance.Resume -= OnResume;
     }
+    #endregion
 
-    #region Spawning/Despawing Sections
-    /// <summary>
-    /// Despawns the given section
-    /// </summary>
-    /// <param name="section">section to despawn</param>
-    public void DespawnSection(Section section)
-    {
-        sections.Remove(section);
-        Destroy(section.gameObject);
-    }
-
-    /// <summary>
-    /// Spawns a randomly chosen section
-    /// </summary>
-    public void SpawnRandomSection()
-    {
-        Section randomSection = sectionPrefabs[Random.Range(0, sectionPrefabs.Count)];
-        SpawnSection(randomSection);
-    }
-
-    /// <summary>
-    /// Spawns the given section
-    /// </summary>
-    /// <param name="section"></param>
-    public void SpawnSection(Section section)
-    {
-        // instantiate given section
-        Section spawnedSection = Instantiate(section, sectionsContainer);
-        
-        // position the instantiated section
-        Section lastSection = sections[sections.Count - 1];
-        Vector3 offset = spawnedSection.AnchorStart.transform.localPosition;
-        spawnedSection.transform.position = lastSection.AnchorEnd.transform.position - offset;
-        
-        // add instantiated section to active sections
-        sections.Add(spawnedSection);
-        Debug.Log("Section spawned");
-    }
-
+    #region Event Methods
     /// <summary>
     /// Executed when the level starts
     /// </summary>
-    public void OnLevelStart()
+    public void OnResume()
     {
-        isPaused = false;
+        isMoving = true;
+
+        StartMovement?.Invoke();
     }
 
     /// <summary>
     /// Executed when the level ends
     /// </summary>
-    public void OnLevelEnd()
+    public void OnPause()
     {
-        isPaused = true;
+        isMoving = false;
+
+        StopMovement?.Invoke();
+    }
+    #endregion
+
+    #region Background Fog
+    private void PositionFog()
+    {
+        if (fogRenderers.Count == 0) return;
+
+        Camera cam = CameraController.Instance.Camera;
+        //calculate camera bounds
+        var camHeight = cam.orthographicSize * 2f;
+        var camWidth = camHeight * cam.aspect;
+        //calculate needed fog scale
+        var fogWidth = camWidth + fogPadding.x;
+        var fogHeight = camHeight + fogPadding.y * 2f;
+        var fogScale = new Vector3(fogWidth / fogSprite.bounds.size.x, fogHeight / fogSprite.bounds.size.y);
+
+        var fogPosition = new Vector3(
+            cam.transform.position.x - camWidth / 2f,
+            cam.transform.position.y
+            );
+
+        foreach (var fogRenderer in fogRenderers)
+        {
+            //set sprite renderer size
+            fogRenderer.transform.localScale = fogScale;
+            //set fog position
+            fogRenderer.transform.position = fogPosition;
+        }
     }
     #endregion
 }
