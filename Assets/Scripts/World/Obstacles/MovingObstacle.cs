@@ -15,15 +15,28 @@ public class MovingObstacle : MonoBehaviour
     [SerializeField] private Vector2 moveTarget;
     [SerializeField] private MovementType movementType;
 
+    private bool isMoving;
     private Vector3 origin;
 
     private void Start()
     {
+        GameManager.Instance.Pause += OnPause;
+        GameManager.Instance.Resume += OnResume;
+
         origin = transform.localPosition;
+        isMoving = GameManager.Instance.CurrentState == GameManager.GameState.Level;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.Pause -= OnPause;
+        GameManager.Instance.Resume -= OnResume;
     }
 
     private void Update()
     {
+        if (!isMoving) return;
+
         // check whether a valid target is set
         if (moveTarget == Vector2.zero) return;
 
@@ -69,6 +82,18 @@ public class MovingObstacle : MonoBehaviour
         float interpollationFactor = Mathf.PingPong(Time.time * movementSpeed, 1f);
         return direction * distance * interpollationFactor;
     }
+
+    #region Event Methods
+    public void OnPause()
+    {
+        isMoving = false;
+    }
+
+    public void OnResume()
+    {
+        isMoving = true;
+    }
+    #endregion
 
 #if UNITY_EDITOR
     /// <summary>
