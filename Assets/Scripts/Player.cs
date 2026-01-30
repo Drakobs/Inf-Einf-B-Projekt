@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
     [Header("References")]
     [SerializeField] Rigidbody2D _rb;
     [SerializeField] Animator _anim;
-    [SerializeField] public ParticleSystem broomFX;
+    [SerializeField] ParticleSystem broomFX;
+    [SerializeField] PlayerInput input;
 
     [Header("Debug Values")]
     [SerializeField] private float flyForce = 35f;
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
     private bool isHoldingFly;
     private bool isAlive = true;
     public event Action Died;
+    private bool isPaused;
 
     //needed for playerCatchUp
     private float originX;
@@ -34,13 +36,17 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        isPaused = GameManager.Instance.CurrentState == GameManager.GameState.Paused;
         GameManager.Instance.Player = this;
         originX = transform.position.x;
+        GameManager.Instance.Pause += OnPause;
+        GameManager.Instance.Resume += OnResume;
     }
 
     //Getting Input action
     public void OnFly(InputAction.CallbackContext context)
     {
+        Debug.Log("OnFly");
         if (context.performed) 
         {
             isHoldingFly = true;
@@ -56,6 +62,10 @@ public class Player : MonoBehaviour
     //Animations get called
     private void Update()
     {
+        if(isPaused)
+        {
+            return;
+        }
         animUpdate();
         playerRotation();
     }
@@ -63,6 +73,10 @@ public class Player : MonoBehaviour
     //Physics
     private void FixedUpdate()
     {
+         if(isPaused)
+        {
+            return;
+        }
         //user is holding flyaction -> fly
         if (isHoldingFly == true)
         {
@@ -78,6 +92,12 @@ public class Player : MonoBehaviour
 
     //Resetting the position of the Player after he is pushed by world
     playerCatchUp();
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.Pause -= OnPause;
+        GameManager.Instance.Resume -= OnResume;
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -155,7 +175,26 @@ public class Player : MonoBehaviour
         _rb.freezeRotation = false;
         Died?.Invoke();
     }
+
+    private void OnPause()
+    {
+        isPaused = true;
+        _rb.simulated = false;
+        input.DeactivateInput();
+        _anim.speed = 0f;
+        broomFX.Stop();
+    }
+    private void OnResume()
+    {
+        isPaused = false;
+        _rb.simulated = true;
+        input.ActivateInput();
+        _anim.speed = 1f;
+        broomFX.Play();
+    }
 }
+
+
 
 
 
