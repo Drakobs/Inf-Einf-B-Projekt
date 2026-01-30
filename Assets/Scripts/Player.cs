@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
@@ -46,6 +47,13 @@ public class Player : MonoBehaviour
     //Getting Input action
     public void OnFly(InputAction.CallbackContext context)
     {
+        // check whether the input came from a mouse
+        if (context.control.device is Mouse)
+        {
+            // prevent flying when clicking on UI
+            if (EventSystem.current.IsPointerOverGameObject()) return;
+        }
+
         Debug.Log("OnFly");
         if (context.performed) 
         {
