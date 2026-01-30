@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
         // update game state
         CurrentState = GameState.StartMenu;
         // open start menu
-        UIManager.Instance.OpenPopup<UIStartMenu>();
+        UIManager.Instance.OpenPopup<UIStartMenu>(true);
     }
 
 
