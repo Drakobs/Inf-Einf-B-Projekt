@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StartMenu : Popup
+public class UIStartMenu : Popup
 {
     #region Popup Methods
     #endregion

@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class LevelHUD : Popup
+public class UILevelHUD : Popup
 {
     [SerializeField] private TMP_Text labelDistance;
 

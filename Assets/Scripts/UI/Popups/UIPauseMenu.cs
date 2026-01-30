@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PauseMenu : Popup
+public class UIPauseMenu : Popup
 {
     public void OnClickResume()
     {

@@ -61,14 +61,14 @@ public class GameManager : MonoBehaviour
         // update game state
         CurrentState = GameState.StartMenu;
         // open start menu
-        UIManager.Instance.OpenPopup<StartMenu>();
+        UIManager.Instance.OpenPopup<UIStartMenu>();
     }
 
 
     public void StartLevel()
     {
         // close all open popups
-        UIManager.Instance.OpenPopup<LevelHUD>(true);
+        UIManager.Instance.OpenPopup<UILevelHUD>(true);
         // update game state
         CurrentState = GameState.Level;
         LevelStarted?.Invoke();
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
     {
         CurrentState = GameState.Paused;
         Pause?.Invoke();
-        UIManager.Instance.OpenPopup<PauseMenu>();
+        UIManager.Instance.OpenPopup<UIPauseMenu>();
     }
 
     public void ResumeGame()
@@ -91,10 +91,9 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        Debug.Log("Game Over");
         LevelEnded?.Invoke();
-
-        UIManager.Instance.OpenPopup<GameOverMenu>();
+        // open game over menu
+        UIManager.Instance.OpenPopup<UIGameOverMenu>(true);
     }
 
     public void Restart(bool instantStart)
@@ -109,7 +108,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator RestartCoroutine(bool instantStart)
     {
         // show loading screen
-        UIManager.Instance.OpenPopup<LoadingScreen>(true);
+        UIManager.Instance.OpenPopup<UILoadingScreen>(true);
         // ensure visibility of loading screen
         yield return null;
 
