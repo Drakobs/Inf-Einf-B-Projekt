@@ -37,6 +37,7 @@ public class LevelHUD : Popup
         GameManager.Instance.Resume -= OnResume;
     }
 
+    #region Event Methods
     private void OnPause()
     {
         isPaused = true;
@@ -45,5 +46,11 @@ public class LevelHUD : Popup
     private void OnResume()
     {
         isPaused = false;
+    }
+    #endregion
+
+    public void OnClickPause()
+    {
+        GameManager.Instance.PauseGame();
     }
 }
