@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
 
     //needed for playerCatchUp
     private float originX;
-    private float catchUpSpeed = 0.5f;
+    private float catchUpSpeed = 1f;
     private float delayTimer = 0f;
     private float horizontalPosOffsetFloat;
 
@@ -141,18 +141,19 @@ public class Player : MonoBehaviour
             //Delay the recovery for 2 Seconds
             delayTimer += Time.deltaTime;
 
-            if(delayTimer >= 2f)
+            if(delayTimer >= 3f)
             {
                 float transitionX = Mathf.Lerp(transform.position.x, originX, Time.deltaTime * catchUpSpeed);
                 transform.position = new Vector3 (transitionX, transform.position.y, transform.position.z);
             }
 
         }
-        else{
+        if(horizontalPosOffsetFloat < 0.1f)
+        {
+            transform.position = new Vector3 (originX, transform.position.y, transform.position.z);  
             //reset the timer after transition is over
             delayTimer = 0f;
         }
-
     }
 
     private void playerRotation()
