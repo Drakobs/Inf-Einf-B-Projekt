@@ -17,10 +17,17 @@ public class Player : MonoBehaviour
     [SerializeField] private bool gameStarted;
     [SerializeField] private float yVelocity_rb;
     private bool isHoldingFly;
-    private float rotationFly = -15f;
     private bool isAlive = true;
     public event Action Died;
 
+    //needed for playerCatchUp
+    private float originX;
+    private float catchUpSpeed = 0.5f;
+    private float delayTimer = 0f;
+    private float horizontalPosOffsetFloat;
+
+
+    //needed for playerRotation
     public float tiltAmount = 15f;  // Maximum angle to tilt
     public float tiltSpeed = 5f;    // How fast the tilt happens
 
@@ -28,6 +35,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.Player = this;
+        originX = transform.position.x;
     }
 
     //Getting Input action
@@ -68,9 +76,8 @@ public class Player : MonoBehaviour
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, maxFlyForce);
         }
 
-        //Resetting the position of the Player after he is pushed by world
-        playerCatchUp();
-
+    //Resetting the position of the Player after he is pushed by world
+    playerCatchUp();
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -96,8 +103,28 @@ public class Player : MonoBehaviour
 
     private void playerCatchUp()
     {
-        //determine if pos is left or right of 0
-        //if()
+        //determine if player is to the left(value -) or right(value +)
+        horizontalPosOffsetFloat = Mathf.Abs(transform.position.x - originX);
+
+        //determine if pos is left or right of origin
+        //Abs -> Absolute Value
+        if(horizontalPosOffsetFloat > 0.1f)
+        {
+            //Delay the recovery for 2 Seconds
+            delayTimer += Time.deltaTime;
+
+            if(delayTimer >= 2f)
+            {
+                float transitionX = Mathf.Lerp(transform.position.x, originX, Time.deltaTime * catchUpSpeed);
+                transform.position = new Vector3 (transitionX, transform.position.y, transform.position.z);
+            }
+
+        }
+        else{
+            //reset the timer after transition is over
+            delayTimer = 0f;
+        }
+
     }
 
     private void playerRotation()
