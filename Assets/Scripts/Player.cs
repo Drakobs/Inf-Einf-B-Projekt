@@ -22,6 +22,9 @@ public class Player : MonoBehaviour
     private bool isAlive = true;
     public event Action Died;
 
+    // for input detection
+    private bool isPointerOverUI;
+
     //used for animator
     private bool isPaused;
     private bool gameMenu;
@@ -54,11 +57,7 @@ public class Player : MonoBehaviour
     public void OnFly(InputAction.CallbackContext context)
     {
         // check whether the input came from a mouse
-        if (context.control.device is Mouse)
-        {
-            // prevent flying when clicking on UI
-            if (EventSystem.current.IsPointerOverGameObject()) return;
-        }
+        if (context.control.device is Mouse && isPointerOverUI) return;
 
         if (context.performed) 
         {
@@ -78,6 +77,9 @@ public class Player : MonoBehaviour
         {
             return;
         }
+
+        isPointerOverUI = EventSystem.current.IsPointerOverGameObject();
+
         animUpdate();
         playerRotation();
     }

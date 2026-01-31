@@ -4847,6 +4847,8 @@ GameObject:
   - component: {fileID: 289765018751627269}
   - component: {fileID: 4874200756186824492}
   - component: {fileID: 8490000539801784354}
+  - component: {fileID: 5745507131389717100}
+  - component: {fileID: 147450364939988355}
   m_Layer: 0
   m_Name: Broom
   m_TagString: Untagged
@@ -4892,7 +4894,7 @@ SpriteRenderer:
   m_SmallMeshCulling: 1
   m_ForceMeshLod: -1
   m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
@@ -4918,12 +4920,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 857269673879777999, guid: 3b58cdaf32b6b4db8928991266b3d319, type: 3}
+  m_Sprite: {fileID: 3442016639249212961, guid: 5ce4aca048ab744409df34a8bdb25961, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.693607, y: 1}
+  m_Size: {x: 3.69, y: 1.0009766}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -4936,9 +4938,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2800419223515376683}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6fbddd44cbe92430783571600a903067, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4950,6 +4952,49 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5745507131389717100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2800419223515376683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7750c35641eb545f7908343eb4c038bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  _rb: {fileID: 147450364939988355}
+  _broom_anim: {fileID: 8490000539801784354}
+  rb_simulated: 0
+  isFlying: 0
+--- !u!50 &147450364939988355
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2800419223515376683}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &3867904816095248877
 GameObject:
   m_ObjectHideFlags: 0
@@ -5006,10 +5051,11 @@ MonoBehaviour:
   _rb: {fileID: 5187577045964592886}
   _anim: {fileID: 4769850960886350779}
   broomFX: {fileID: 5617176085831110828}
+  input: {fileID: 2816258891624908847}
+  broom: {fileID: 5745507131389717100}
   flyForce: 35
   maxFlyForce: 20
   isFlying: 0
-  gameStarted: 0
   yVelocity_rb: 0
   tiltAmount: 15
   tiltSpeed: 5
