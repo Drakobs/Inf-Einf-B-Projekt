@@ -92,6 +92,17 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         LevelEnded?.Invoke();
+
+        int score = (int)Map.MovedDistance;
+
+        //check for new high score
+        if (score > PlayerPrefs.GetInt("HighScore", 0))
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+        }
+        // save score as last score
+        PlayerPrefs.SetInt("LastScore", score);
+        
         // open game over menu
         UIManager.Instance.OpenPopup<UIGameOverMenu>(true);
     }
