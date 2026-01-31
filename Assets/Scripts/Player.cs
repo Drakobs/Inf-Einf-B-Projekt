@@ -11,21 +11,24 @@ public class Player : MonoBehaviour
     [SerializeField] Animator _anim;
     [SerializeField] ParticleSystem broomFX;
     [SerializeField] PlayerInput input;
+    [SerializeField] private Broom Broom;
 
     [Header("Debug Values")]
     [SerializeField] private float flyForce = 35f;
     [SerializeField] private float maxFlyForce = 20f;
     [SerializeField] private bool isFlying;
-    [SerializeField] private bool gameStarted;
     [SerializeField] private float yVelocity_rb;
     private bool isHoldingFly;
     private bool isAlive = true;
     public event Action Died;
+
+    //used for animator
     private bool isPaused;
+    private bool gameMenu;
 
     //needed for playerCatchUp
     private float originX;
-    private float catchUpSpeed = 1f;
+    private float catchUpSpeed = 0.5f;
     private float delayTimer = 0f;
     private float horizontalPosOffsetFloat;
 
@@ -37,11 +40,14 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        //resetting the speed of anim at start
+        _anim.speed = 1f;
         isPaused = GameManager.Instance.CurrentState == GameManager.GameState.Paused;
         GameManager.Instance.Player = this;
         originX = transform.position.x;
         GameManager.Instance.Pause += OnPause;
         GameManager.Instance.Resume += OnResume;
+        GameManager.Instance.LevelStarted += OnLevel;
     }
 
     //Getting Input action
@@ -54,7 +60,6 @@ public class Player : MonoBehaviour
             if (EventSystem.current.IsPointerOverGameObject()) return;
         }
 
-        Debug.Log("OnFly");
         if (context.performed) 
         {
             isHoldingFly = true;
@@ -63,8 +68,7 @@ public class Player : MonoBehaviour
         {
             isHoldingFly = false;
         }
-            isFlying = true;
-            _anim.SetBool("isGrounded", !isFlying); 
+        AnimOnFly();
     }
 
     //Animations get called
@@ -106,16 +110,16 @@ public class Player : MonoBehaviour
     {
         GameManager.Instance.Pause -= OnPause;
         GameManager.Instance.Resume -= OnResume;
+        GameManager.Instance.LevelStarted -= OnLevel;
     }
 
+    //collider on bottom of player -> not flying anymore
     public void OnTriggerEnter2D(Collider2D collision)
     {
         isFlying = false; 
-        gameStarted = true;
         _anim.SetBool("isGrounded", !isFlying);
-        _anim.SetBool("gameStarted", gameStarted);
         broomFX.Stop();
-        //reset rotation when not flying & rotation is not 0 -> not working
+        Broom.isFlying = false;
     }
 
 
@@ -124,9 +128,8 @@ public class Player : MonoBehaviour
     {
         yVelocity_rb = _rb.linearVelocity.y;
         _anim.SetFloat("yVelocity", yVelocity_rb);
-        //having the player rotate while having positive y-force
-
-
+        //check every frame if game is in level -> otherwise _anim -> idle
+        gameMenu = GameManager.GameState.Paused == GameManager.Instance.CurrentState;
     }
 
     private void playerCatchUp()
@@ -175,6 +178,16 @@ public class Player : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * tiltSpeed);
     }
 
+
+
+    private void AnimOnFly()
+    {
+        isFlying = true;
+        _anim.SetBool("isGrounded", !isFlying); 
+        Broom.isFlying = true;
+    }
+
+    //GAME EVENTS
     public void Kill()
     {
         //check if already eliminated
@@ -182,9 +195,17 @@ public class Player : MonoBehaviour
 
         isAlive = false;
         _rb.freezeRotation = false;
+        _anim.speed = 0f;
         Died?.Invoke();
+        Broom.rb_simulated = true;
     }
 
+    //idle animation in Menu
+    private void OnLevel()
+    {
+        _anim.SetBool("gameStarted", !gameMenu);
+    }
+    
     private void OnPause()
     {
         isPaused = true;
