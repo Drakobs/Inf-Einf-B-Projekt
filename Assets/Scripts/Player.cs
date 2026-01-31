@@ -7,11 +7,11 @@ using UnityEngine.EventSystems;
 public class Player : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] Rigidbody2D _rb;
-    [SerializeField] Animator _anim;
-    [SerializeField] ParticleSystem broomFX;
-    [SerializeField] PlayerInput input;
-    [SerializeField] private Broom Broom;
+    [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] private Animator _anim;
+    [SerializeField] private ParticleSystem broomFX;
+    [SerializeField] private PlayerInput input;
+    [SerializeField] private Broom broom;
 
     [Header("Debug Values")]
     [SerializeField] private float flyForce = 35f;
@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
         isFlying = false; 
         _anim.SetBool("isGrounded", !isFlying);
         broomFX.Stop();
-        Broom.isFlying = false;
+        broom.isFlying = false;
     }
 
 
@@ -184,7 +184,7 @@ public class Player : MonoBehaviour
     {
         isFlying = true;
         _anim.SetBool("isGrounded", !isFlying); 
-        Broom.isFlying = true;
+        broom.isFlying = true;
     }
 
     //GAME EVENTS
@@ -197,7 +197,7 @@ public class Player : MonoBehaviour
         _rb.freezeRotation = false;
         _anim.speed = 0f;
         Died?.Invoke();
-        Broom.rb_simulated = true;
+        broom.rb_simulated = true;
     }
 
     //idle animation in Menu
