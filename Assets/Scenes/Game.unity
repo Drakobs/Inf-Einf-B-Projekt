@@ -320,6 +320,9 @@ MonoBehaviour:
   - {fileID: 164308641442452486, guid: 1a97ef2856e2aeb4a9972219f1734095, type: 3}
   - {fileID: 164308641442452486, guid: 669aeea47a4a04df0ab0336b782a36c7, type: 3}
   - {fileID: 164308641442452486, guid: 29b800354f532c546b423463cc1ef575, type: 3}
+  - {fileID: 164308641442452486, guid: a3f6202a52efae54cac648868014e0ae, type: 3}
+  - {fileID: 164308641442452486, guid: 27d144ea5ef9e47d89370bd7f1f1c159, type: 3}
+  - {fileID: 164308641442452486, guid: ee3780b3f3fea4045bdad6d078f5fce7, type: 3}
   anchorSpawn: {fileID: 202266134}
   anchorDespawn: {fileID: 1974693056}
   startSection: {fileID: 57009919}
