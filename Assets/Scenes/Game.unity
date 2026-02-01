@@ -171,6 +171,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaseSection
       objectReference: {fileID: 0}
+    - target: {fileID: 7374250097066152447, guid: 772b6dc4216abc843860a508cfa0f53a, type: 3}
+      propertyPath: m_TileSpriteArray.Array.data[12].m_Data
+      value: 
+      objectReference: {fileID: 1080033386, guid: 004ec292e4bab414891dedeb5a096993, type: 3}
+    - target: {fileID: 7374250097066152447, guid: 772b6dc4216abc843860a508cfa0f53a, type: 3}
+      propertyPath: m_TileSpriteArray.Array.data[13].m_Data
+      value: 
+      objectReference: {fileID: 1650755395, guid: 004ec292e4bab414891dedeb5a096993, type: 3}
+    - target: {fileID: 7374250097066152447, guid: 772b6dc4216abc843860a508cfa0f53a, type: 3}
+      propertyPath: m_TileSpriteArray.Array.data[14].m_Data
+      value: 
+      objectReference: {fileID: -1740674748, guid: 004ec292e4bab414891dedeb5a096993, type: 3}
+    - target: {fileID: 7374250097066152447, guid: 772b6dc4216abc843860a508cfa0f53a, type: 3}
+      propertyPath: m_TileSpriteArray.Array.data[12].m_RefCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374250097066152447, guid: 772b6dc4216abc843860a508cfa0f53a, type: 3}
+      propertyPath: m_TileSpriteArray.Array.data[13].m_RefCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374250097066152447, guid: 772b6dc4216abc843860a508cfa0f53a, type: 3}
+      propertyPath: m_TileSpriteArray.Array.data[14].m_RefCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374250097066152447, guid: 772b6dc4216abc843860a508cfa0f53a, type: 3}
+      propertyPath: m_Tiles.Array.data[58].second.m_TileSpriteIndex
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374250097066152447, guid: 772b6dc4216abc843860a508cfa0f53a, type: 3}
+      propertyPath: m_Tiles.Array.data[59].second.m_TileSpriteIndex
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374250097066152447, guid: 772b6dc4216abc843860a508cfa0f53a, type: 3}
+      propertyPath: m_Tiles.Array.data[60].second.m_TileSpriteIndex
+      value: 14
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -282,6 +318,7 @@ MonoBehaviour:
   sectionsContainer: {fileID: 1727703638}
   sectionPrefabs:
   - {fileID: 164308641442452486, guid: 1a97ef2856e2aeb4a9972219f1734095, type: 3}
+  - {fileID: 164308641442452486, guid: 669aeea47a4a04df0ab0336b782a36c7, type: 3}
   anchorSpawn: {fileID: 202266134}
   anchorDespawn: {fileID: 1974693056}
   startSection: {fileID: 57009919}
