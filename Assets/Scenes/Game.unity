@@ -282,6 +282,8 @@ MonoBehaviour:
   sectionsContainer: {fileID: 1727703638}
   sectionPrefabs:
   - {fileID: 164308641442452486, guid: 1a97ef2856e2aeb4a9972219f1734095, type: 3}
+  - {fileID: 164308641442452486, guid: 669aeea47a4a04df0ab0336b782a36c7, type: 3}
+  - {fileID: 164308641442452486, guid: 29b800354f532c546b423463cc1ef575, type: 3}
   anchorSpawn: {fileID: 202266134}
   anchorDespawn: {fileID: 1974693056}
   startSection: {fileID: 57009919}
