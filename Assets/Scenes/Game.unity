@@ -386,7 +386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnvironmentParallaxLayer
   sectionsContainer: {fileID: 926521401}
   sectionPrefabs:
-  - {fileID: 5756031951447931063, guid: 40b6da9631ef38247861918eaf1fbba7, type: 3}
+  - {fileID: 3577694096989562054, guid: 6d07a68fc683f6140964faf08fb55694, type: 3}
   anchorSpawn: {fileID: 202266134}
   anchorDespawn: {fileID: 1974693056}
   startSection: {fileID: 1359160197}
@@ -707,17 +707,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 926521401}
     m_Modifications:
+    - target: {fileID: 2130544400386978974, guid: 40b6da9631ef38247861918eaf1fbba7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130544400386978974, guid: 40b6da9631ef38247861918eaf1fbba7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.87
+      objectReference: {fileID: 0}
     - target: {fileID: 2242614473310625955, guid: 40b6da9631ef38247861918eaf1fbba7, type: 3}
       propertyPath: m_Name
       value: Background1_Section_Start
       objectReference: {fileID: 0}
     - target: {fileID: 2293518105201404064, guid: 40b6da9631ef38247861918eaf1fbba7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.64134
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2293518105201404064, guid: 40b6da9631ef38247861918eaf1fbba7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.46228
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2293518105201404064, guid: 40b6da9631ef38247861918eaf1fbba7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -750,6 +758,22 @@ PrefabInstance:
     - target: {fileID: 2293518105201404064, guid: 40b6da9631ef38247861918eaf1fbba7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6481411322586220719, guid: 40b6da9631ef38247861918eaf1fbba7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 6481411322586220719, guid: 40b6da9631ef38247861918eaf1fbba7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 8336601057797250037, guid: 40b6da9631ef38247861918eaf1fbba7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 8336601057797250037, guid: 40b6da9631ef38247861918eaf1fbba7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1411,7 +1435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnvironmentParallaxLayer
   sectionsContainer: {fileID: 783797587}
   sectionPrefabs:
-  - {fileID: 1083756480142970695, guid: adb734a4955cbfa448bedba5c8d1af38, type: 3}
+  - {fileID: 348824970144967294, guid: c0010fa62ecba844e8855c7586eac31f, type: 3}
   anchorSpawn: {fileID: 202266134}
   anchorDespawn: {fileID: 1974693056}
   startSection: {fileID: 755421900}
