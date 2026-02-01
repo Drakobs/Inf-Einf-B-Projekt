@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
-    public static Player Instance { get; private set; }
     [Header("References")]
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private Animator _anim;
@@ -40,19 +39,6 @@ public class Player : MonoBehaviour
     //needed for playerRotation
     public float tiltAmount = 15f;  // Maximum angle to tilt
     public float tiltSpeed = 5f;    // How fast the tilt happens
-
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
 
 
     private void Start()
@@ -167,7 +153,7 @@ public class Player : MonoBehaviour
                 //Delay the recovery for 2 Seconds
                 delayTimer += Time.deltaTime;
 
-                if(delayTimer >= 3f)
+                if(delayTimer >= 2f)
                 {
                     float transitionX = Mathf.Lerp(transform.position.x, originX, Time.deltaTime * catchUpSpeed);
                     transform.position = new Vector3 (transitionX, transform.position.y, transform.position.z);
@@ -227,6 +213,7 @@ public class Player : MonoBehaviour
         _rb.freezeRotation = false;
         _anim.speed = 0f;
         broom.rb_simulated = true;
+        input.DeactivateInput();
         Died?.Invoke();
         
     }
