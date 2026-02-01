@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance { get; private set; }
     [Header("References")]
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private Animator _anim;
@@ -39,6 +40,19 @@ public class Player : MonoBehaviour
     //needed for playerRotation
     public float tiltAmount = 15f;  // Maximum angle to tilt
     public float tiltSpeed = 5f;    // How fast the tilt happens
+
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
 
     private void Start()
@@ -136,48 +150,62 @@ public class Player : MonoBehaviour
 
     private void playerCatchUp()
     {
-        //determine if player is to the left(value -) or right(value +)
-        horizontalPosOffsetFloat = Mathf.Abs(transform.position.x - originX);
-
-        //determine if pos is left or right of origin
-        //Abs -> Absolute Value
-        if(horizontalPosOffsetFloat > 0.1f)
+        //stop if player is dead
+        if(!isAlive)
         {
-            //Delay the recovery for 2 Seconds
-            delayTimer += Time.deltaTime;
-
-            if(delayTimer >= 3f)
-            {
-                float transitionX = Mathf.Lerp(transform.position.x, originX, Time.deltaTime * catchUpSpeed);
-                transform.position = new Vector3 (transitionX, transform.position.y, transform.position.z);
-            }
-
+            return;
         }
-        if(horizontalPosOffsetFloat < 0.1f)
+        else
         {
-            transform.position = new Vector3 (originX, transform.position.y, transform.position.z);  
-            //reset the timer after transition is over
-            delayTimer = 0f;
+            //determine if player is to the left(value -) or right(value +)
+            horizontalPosOffsetFloat = Mathf.Abs(transform.position.x - originX);
+
+            //determine if pos is left or right of origin
+            //Abs -> Absolute Value
+            if(horizontalPosOffsetFloat > 0.1f)
+            {
+                //Delay the recovery for 2 Seconds
+                delayTimer += Time.deltaTime;
+
+                if(delayTimer >= 3f)
+                {
+                    float transitionX = Mathf.Lerp(transform.position.x, originX, Time.deltaTime * catchUpSpeed);
+                    transform.position = new Vector3 (transitionX, transform.position.y, transform.position.z);
+                }
+
+            }
+            if(horizontalPosOffsetFloat < 0.1f)
+            {
+                transform.position = new Vector3 (originX, transform.position.y, transform.position.z);  
+                //reset the timer after transition is over
+                delayTimer = 0f;
+            }
         }
     }
 
     private void playerRotation()
     {
-        float targetZAngle = 0f;
+        if(!isAlive)
+        {
+            return;
+        }
+        else{
+            float targetZAngle = 0f;
 
-        //determine if velocity is - or +
-        if (_rb.linearVelocity.y > 0.1f) 
-        {
-            targetZAngle = tiltAmount;
-        }
-        else if (_rb.linearVelocity.y < -0.1f)
-        {
-            targetZAngle = -tiltAmount;
-        }
-        //transform to euler angle
-        Quaternion targetRotation = Quaternion.Euler(0, 0, targetZAngle);
-        //transform angle over time
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * tiltSpeed);
+            //determine if velocity is - or +
+            if (_rb.linearVelocity.y > 0.1f) 
+            {
+                targetZAngle = tiltAmount;
+            }
+            else if (_rb.linearVelocity.y < -0.1f)
+            {
+                targetZAngle = -tiltAmount;
+            }
+            //transform to euler angle
+            Quaternion targetRotation = Quaternion.Euler(0, 0, targetZAngle);
+            //transform angle over time
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * tiltSpeed);
+         }
     }
 
 
@@ -198,8 +226,9 @@ public class Player : MonoBehaviour
         isAlive = false;
         _rb.freezeRotation = false;
         _anim.speed = 0f;
-        Died?.Invoke();
         broom.rb_simulated = true;
+        Died?.Invoke();
+        
     }
 
     //idle animation in Menu
