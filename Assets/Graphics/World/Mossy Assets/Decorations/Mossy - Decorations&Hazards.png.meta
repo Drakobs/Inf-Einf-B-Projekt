@@ -487,7 +487,7 @@ TextureImporter:
         width: 442
         height: 184
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -787,35 +787,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mossy - Decorations&Hazards_31
-      rect:
-        serializedVersion: 2
-        x: 1599
-        y: 79
-        width: 141
-        height: 284
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0d3d4d6c009844460800000000000000
-      internalID: 7225050338637960144
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Mossy - Decorations&Hazards_32
       rect:
         serializedVersion: 2
-        x: 1662
-        y: 79
-        width: 225
-        height: 399
+        x: 1588
+        y: 73
+        width: 390
+        height: 413
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -826,50 +804,6 @@ TextureImporter:
       bones: []
       spriteID: 4beae637c0e2ae4d0800000000000000
       internalID: -3104618362107416908
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mossy - Decorations&Hazards_33
-      rect:
-        serializedVersion: 2
-        x: 1811
-        y: 79
-        width: 133
-        height: 257
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 78326c6766b31bea0800000000000000
-      internalID: -5858836328966904953
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mossy - Decorations&Hazards_34
-      rect:
-        serializedVersion: 2
-        x: 1878
-        y: 81
-        width: 88
-        height: 200
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4022689c33c51ddf0800000000000000
-      internalID: -157243134487158268
       vertices: []
       indices: 
       edges: []
