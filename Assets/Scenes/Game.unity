@@ -169,7 +169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5863485673100098417, guid: 772b6dc4216abc843860a508cfa0f53a, type: 3}
       propertyPath: m_Name
-      value: BaseSection
+      value: SectionStart
       objectReference: {fileID: 0}
     - target: {fileID: 7374250097066152447, guid: 772b6dc4216abc843860a508cfa0f53a, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[12].m_Data

@@ -55,6 +55,7 @@ MonoBehaviour:
   - {fileID: 5074781594860677763}
   - {fileID: 8299390296658915809}
   - {fileID: 5704103135304529579}
+  dotAnimationInterval: 0.5
 --- !u!222 &2571770963893589390
 CanvasRenderer:
   m_ObjectHideFlags: 0
