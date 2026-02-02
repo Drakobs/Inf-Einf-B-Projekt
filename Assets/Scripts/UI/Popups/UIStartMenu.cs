@@ -12,6 +12,9 @@ public class UIStartMenu : Popup
     [SerializeField] private TMP_Text labelLastScore;
     [SerializeField] private TMP_Text labelHighScore;
 
+    [Header("Version Display")]
+    [SerializeField] private TMP_Text labelVersion;
+
     public void Start()
     {
         StartCoroutine(Blink());
@@ -19,6 +22,8 @@ public class UIStartMenu : Popup
         // display saved scores
         labelLastScore.text = $"{PlayerPrefs.GetInt("LastScore", 0)}";
         labelHighScore.text = $"{PlayerPrefs.GetInt("HighScore", 0)}";
+
+        labelVersion.text = $"v.{Application.version}";
     }
 
     public void OnClickStart()
@@ -55,5 +60,4 @@ public class UIStartMenu : Popup
             yield return null;
         }
     }
-
 }

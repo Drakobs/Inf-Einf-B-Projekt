@@ -87,7 +87,7 @@ public class MovingObstacle : MonoBehaviour
         float distance = direction.magnitude;
         // normalize vector to get only the direction
         direction.Normalize();
-        // calculate the travelled distance using PingPong function
+        // calculate the offset distance using PingPong function
         float travelledDistance = Mathf.PingPong(elapsedTime * movementSpeed, distance);
         // return the calculated offset
         return direction * travelledDistance;
