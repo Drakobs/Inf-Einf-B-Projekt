@@ -17,9 +17,12 @@ public class MovingObstacle : MonoBehaviour
 
     private bool isMoving;
     private Vector3 origin;
+    private float elapsedTime;
 
     private void Start()
     {
+        elapsedTime = 0f;
+
         GameManager.Instance.Pause += OnPause;
         GameManager.Instance.Resume += OnResume;
 
@@ -36,6 +39,8 @@ public class MovingObstacle : MonoBehaviour
     private void Update()
     {
         if (!isMoving) return;
+        
+        elapsedTime += Time.deltaTime;
 
         // check whether a valid target is set
         if (moveTarget == Vector2.zero) return;
@@ -61,8 +66,12 @@ public class MovingObstacle : MonoBehaviour
         float distance = direction.magnitude;
         // normalize vector to get only the direction
         direction.Normalize();
+
+        // calculate the current speed of movement
+        float currentSpeed = Mathf.PI * movementSpeed / distance;
+
         // calculate an interpolation factor betweeen 0 an 1 using sine function for smooth movement
-        float interpollationFactor = (Mathf.Sin(Time.time * movementSpeed) + 1f) / 2f; // 0…1
+        float interpollationFactor = (Mathf.Sin(elapsedTime * currentSpeed) + 1f) * 0.5f;
         // return the calculated offset
         return direction * distance * interpollationFactor;
     }
@@ -78,9 +87,10 @@ public class MovingObstacle : MonoBehaviour
         float distance = direction.magnitude;
         // normalize vector to get only the direction
         direction.Normalize();
-        // calculate an interpolation factor between 0 and 1 using PingPong function
-        float interpollationFactor = Mathf.PingPong(Time.time * movementSpeed, 1f);
-        return direction * distance * interpollationFactor;
+        // calculate the travelled distance using PingPong function
+        float travelledDistance = Mathf.PingPong(elapsedTime * movementSpeed, distance);
+        // return the calculated offset
+        return direction * travelledDistance;
     }
 
     #region Event Methods

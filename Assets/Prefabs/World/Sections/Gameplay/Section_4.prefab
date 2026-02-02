@@ -1364,7 +1364,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 511463181
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_SortAtRoot: 0
   m_Sort3DAs2D: 0
 --- !u!1 &5749003635600051223
@@ -3193,9 +3193,9 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8698448393608809599}
   m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 511463181
+  m_SortingLayer: 2
+  m_SortingOrder: 5
   m_SortAtRoot: 0
   m_Sort3DAs2D: 0
 --- !u!1001 &5099081823956302848
@@ -3280,7 +3280,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8791535321095714388, guid: dfdd677140b75544ca5e8a4e14f7e0ed, type: 3}
       propertyPath: movementSpeed
-      value: 0.25
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9045573127142741226, guid: dfdd677140b75544ca5e8a4e14f7e0ed, type: 3}
       propertyPath: m_Size.x
@@ -3738,7 +3738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8791535321095714388, guid: dfdd677140b75544ca5e8a4e14f7e0ed, type: 3}
       propertyPath: movementSpeed
-      value: 0.2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9045573127142741226, guid: dfdd677140b75544ca5e8a4e14f7e0ed, type: 3}
       propertyPath: m_Size.x
@@ -4199,7 +4199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8791535321095714388, guid: dfdd677140b75544ca5e8a4e14f7e0ed, type: 3}
       propertyPath: movementSpeed
-      value: 0.08
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 9045573127142741226, guid: dfdd677140b75544ca5e8a4e14f7e0ed, type: 3}
       propertyPath: m_Size.x
@@ -4660,7 +4660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8791535321095714388, guid: dfdd677140b75544ca5e8a4e14f7e0ed, type: 3}
       propertyPath: movementSpeed
-      value: 0.125
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 9045573127142741226, guid: dfdd677140b75544ca5e8a4e14f7e0ed, type: 3}
       propertyPath: m_Size.x
