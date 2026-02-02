@@ -40,6 +40,19 @@ public class Broom : MonoBehaviour
             _rb.simulated = true;
          }
     }
+    public void PauseAnim(bool isPaused)
+    {
+        float anim_speed;
+        if(isPaused == true)
+        {
+            anim_speed = 0f;
+        }
+        else
+        {
+            anim_speed = 1f;
+        }
+    _broom_anim.speed = anim_speed;
+    }
     public void OnDeath()
     {
         broom_collider.enabled = true;

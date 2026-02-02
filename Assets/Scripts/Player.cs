@@ -226,6 +226,7 @@ public class Player : MonoBehaviour
     private void OnPause()
     {
         isPaused = true;
+        broom.PauseAnim(isPaused);
         _rb.simulated = false;
         input.DeactivateInput();
         _anim.speed = 0f;
@@ -234,6 +235,7 @@ public class Player : MonoBehaviour
     private void OnResume()
     {
         isPaused = false;
+        broom.PauseAnim(isPaused);
         _rb.simulated = true;
         input.ActivateInput();
         _anim.speed = 1f;
