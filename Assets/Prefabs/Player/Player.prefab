@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2136538633241254778}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: -1, y: -0.19999999, z: 0}
+  m_LocalPosition: {x: -1, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4850,6 +4850,7 @@ GameObject:
   - component: {fileID: 5745507131389717100}
   - component: {fileID: 147450364939988355}
   - component: {fileID: 5212737822745037284}
+  - component: {fileID: 405062614995821350}
   m_Layer: 0
   m_Name: Broom
   m_TagString: Untagged
@@ -4969,7 +4970,7 @@ MonoBehaviour:
   _rb: {fileID: 147450364939988355}
   _broom_anim: {fileID: 8490000539801784354}
   player: {fileID: 4979166476739134176}
-  broom_collider: {fileID: 5212737822745037284}
+  broom_collider: {fileID: 405062614995821350}
   rb_simulated: 0
   isFlying: 0
 --- !u!50 &147450364939988355
@@ -5000,6 +5001,75 @@ Rigidbody2D:
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!60 &5212737822745037284
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2800419223515376683}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.69, y: 1.0009766}
+    newSize: {x: 3.69, y: 1.0009766}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.78, y: -0.026367188}
+      - {x: 1.805, y: -0.026367188}
+      - {x: 1.8549999, y: 0.023632813}
+      - {x: 1.8549999, y: 0.22363281}
+      - {x: 1.8299999, y: 0.3236328}
+      - {x: 1.755, y: 0.3486328}
+      - {x: 1.5799999, y: 0.3486328}
+      - {x: 1.505, y: 0.24863282}
+      - {x: 1.13, y: 0.19863282}
+      - {x: 0.62999994, y: 0.09863281}
+      - {x: 0.15499993, y: 0.04863281}
+      - {x: -0.5950001, y: -0.07636719}
+      - {x: -1.2200001, y: -0.15136719}
+      - {x: -1.4700001, y: -0.1263672}
+      - {x: -1.82, y: -0.15136719}
+      - {x: -1.8450001, y: -0.20136718}
+      - {x: -1.8450001, y: -0.4763672}
+      - {x: -1.82, y: -0.5013672}
+      - {x: -1.445, y: -0.5013672}
+      - {x: -0.6950001, y: -0.3263672}
+      - {x: 0.17999993, y: -0.20136718}
+      - {x: 1.6049999, y: -0.0013671875}
+  m_UseDelaunayMesh: 1
+--- !u!60 &405062614995821350
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5172,9 +5242,25 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 61b0ded8-8f8d-4389-86cf-d20f36cf2e38
     m_ActionName: 'Player/Fly[/Mouse/leftButton,/Touchscreen/press,/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4979166476739134176}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnPauseInput
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b45be623-e3b3-4b6e-b03d-12aad455e6e1
+    m_ActionName: 'Gameplay/Pause[/XInputControllerWindows/start,/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!212 &7433830859326692608

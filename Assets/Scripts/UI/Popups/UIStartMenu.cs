@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class UIStartMenu : Popup
 {
+    [Header("Start Menu Settings")]
     [SerializeField] private TMP_Text labelBlinking;
     [SerializeField] private float blinkDuration;
 

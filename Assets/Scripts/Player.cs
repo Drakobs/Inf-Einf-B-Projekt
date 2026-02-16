@@ -69,6 +69,11 @@ public class Player : MonoBehaviour
         AnimOnFly();
     }
 
+    public void OnPauseInput()
+    {
+        GameManager.Instance.PauseGame();
+    }
+
     //Animations get called
     private void Update()
     {

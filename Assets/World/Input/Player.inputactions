@@ -3,13 +3,22 @@
     "name": "Player",
     "maps": [
         {
-            "name": "Player",
+            "name": "Gameplay",
             "id": "5fb4aa52-1379-4528-b7e7-25a0e3a6cbb4",
             "actions": [
                 {
                     "name": "Fly",
                     "type": "Button",
                     "id": "61b0ded8-8f8d-4389-86cf-d20f36cf2e38",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "b45be623-e3b3-4b6e-b03d-12aad455e6e1",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -58,6 +67,28 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "Fly",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2e45b6a2-10e2-4462-9f13-3a099416d3c3",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "915e899a-c10b-45bf-9db6-92d929e50753",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

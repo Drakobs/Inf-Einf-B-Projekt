@@ -78,6 +78,9 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        // check if game is already paused
+        if (CurrentState == GameState.Paused) return;
+
         CurrentState = GameState.Paused;
         Pause?.Invoke();
         UIManager.Instance.OpenPopup<UIPauseMenu>();
