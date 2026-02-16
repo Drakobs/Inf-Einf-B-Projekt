@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3a3b21dd5984764fb2c81087ef5ecc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  defaultSelectedElement: {fileID: 0}
   imagesDot:
   - {fileID: 5074781594860677763}
   - {fileID: 8299390296658915809}

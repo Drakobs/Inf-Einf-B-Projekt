@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5a0491dd9e7c746a8cdc41c622049e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  defaultSelectedElement: {fileID: 0}
   labelDistance: {fileID: 3934226817881154976}
 --- !u!1 &2362059586671300661
 GameObject:
@@ -490,7 +491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}

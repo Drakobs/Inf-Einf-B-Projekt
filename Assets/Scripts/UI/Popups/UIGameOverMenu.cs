@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class UIGameOverMenu : Popup
 {
+    [Header("GameOver Menu Settings")]
     [SerializeField] private UINumberAnimator scoreAnimator;
 
     private void Start()

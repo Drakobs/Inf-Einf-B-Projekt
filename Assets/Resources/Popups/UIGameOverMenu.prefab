@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0e993c98bf88244830bf6e55e77b16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameOverMenu
+  defaultSelectedElement: {fileID: 3184869391841481743}
   scoreAnimator: {fileID: 56028725286225382}
 --- !u!222 &5658628804170105725
 CanvasRenderer:
@@ -979,6 +980,18 @@ PrefabInstance:
       value: 2.02
       objectReference: {fileID: 0}
     - target: {fileID: 4048958847621521050, guid: 92a06585d40a20d4299bf7b09ec929ec, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048958847621521050, guid: 92a06585d40a20d4299bf7b09ec929ec, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 8855988096276343134}
+    - target: {fileID: 4048958847621521050, guid: 92a06585d40a20d4299bf7b09ec929ec, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 8855988096276343134}
+    - target: {fileID: 4048958847621521050, guid: 92a06585d40a20d4299bf7b09ec929ec, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3879504510781971608}
@@ -1004,6 +1017,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 166284360131643750, guid: 92a06585d40a20d4299bf7b09ec929ec, type: 3}
   m_PrefabInstance: {fileID: 55896635682035758}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4104572766790895284 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4048958847621521050, guid: 92a06585d40a20d4299bf7b09ec929ec, type: 3}
+  m_PrefabInstance: {fileID: 55896635682035758}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &4816037805992212420
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1101,6 +1125,22 @@ PrefabInstance:
       value: 2.02
       objectReference: {fileID: 0}
     - target: {fileID: 4048958847621521050, guid: 92a06585d40a20d4299bf7b09ec929ec, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048958847621521050, guid: 92a06585d40a20d4299bf7b09ec929ec, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 4104572766790895284}
+    - target: {fileID: 4048958847621521050, guid: 92a06585d40a20d4299bf7b09ec929ec, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 4104572766790895284}
+    - target: {fileID: 4048958847621521050, guid: 92a06585d40a20d4299bf7b09ec929ec, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048958847621521050, guid: 92a06585d40a20d4299bf7b09ec929ec, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3879504510781971608}
@@ -1121,8 +1161,24 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92a06585d40a20d4299bf7b09ec929ec, type: 3}
+--- !u!1 &3184869391841481743 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7990772258815452107, guid: 92a06585d40a20d4299bf7b09ec929ec, type: 3}
+  m_PrefabInstance: {fileID: 4816037805992212420}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4654683935184125602 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 166284360131643750, guid: 92a06585d40a20d4299bf7b09ec929ec, type: 3}
   m_PrefabInstance: {fileID: 4816037805992212420}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8855988096276343134 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4048958847621521050, guid: 92a06585d40a20d4299bf7b09ec929ec, type: 3}
+  m_PrefabInstance: {fileID: 4816037805992212420}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3184869391841481743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
